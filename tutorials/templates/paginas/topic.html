@@ -1,0 +1,18 @@
+{% extends "paginas/base.html" %}
+
+{% block conteudo %}
+    <h3> Tópico: {{ topic }}</h3>
+    <p>Anotações</p>
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <p>{{ entry.date_added}}</p>
+                <p>{{ entry.text}}</p>
+            </li>
+        {% empty %}
+            <li>Não há tópicos</li>
+        {% endfor %}
+    </ul>
+
+     <a href = "{% url 'new_entry' %}" style="text-decoration: none">Adicionar nova anotação</a>
+{% endblock conteudo %}

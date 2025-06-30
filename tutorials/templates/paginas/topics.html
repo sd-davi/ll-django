@@ -1,0 +1,17 @@
+{% extends "paginas/base.html" %}
+
+{% block conteudo %}
+    Topicos: 
+
+    <ul>
+        {% for topic in topics %}
+            
+            <li>
+                <a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{ topic }}</a>
+            </li>
+        {% empty %}
+            <li>Não há tópicos</li>
+        {% endfor %}
+    </ul>
+    <a href = "{% url 'new_topic' %}" style="text-decoration: none">Adicionar Topico</a>
+{% endblock conteudo %}

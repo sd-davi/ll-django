@@ -1,8 +1,7 @@
 {% extends "paginas/base.html" %}
 
-{% block content %}
-
-    {% if form.erros %}
+{% block conteudo %}
+        {% if form.errors %}
         <p>Seu login e senha estão incorretos</p>
     {% endif %}
 
@@ -14,5 +13,5 @@
         <input type =  "hidden" name = "next"  value = "{% url 'index' %}" />
 
     </form>
+{% endblock conteudo %}
 
-{% endblock content %}

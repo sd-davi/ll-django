@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Topic
+from .models import Topic, Entry
 from .forms import TopicForm, EntryForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -49,3 +49,20 @@ def new_entry(request, topic_id):
             return HttpResponseRedirect(reverse('topic',args=[topic_id]))
     context = {'topic' : topic ,'form' : form}
     return render(request, "paginas/new_entry.html", context)
+
+def edit_entry(request, entry_id):
+    entry = Entry.objects.get(id = entry_id)
+    topic = entry.topic
+    
+    if request.method != 'POST':
+        # traz anotação já existente
+        form =  EntryForm(instance=entry)
+    else:
+        # salva o dado da requisição sobre a anotação
+        form =  EntryForm(instance=entry, data= request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('topic', args=[topic.id]))
+    context = {'topic':topic,'entry':entry, 'form':form}
+    return render(request,"paginas/edit_entry.html",context)
+        

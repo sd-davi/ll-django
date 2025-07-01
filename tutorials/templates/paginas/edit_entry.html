@@ -1,0 +1,15 @@
+{% extends "paginas/base.html" %}
+
+{% block conteudo %}
+
+<p><a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{topic}}</a></p>
+
+<form action= "{% url 'edit_entry' entry.id %}" method = 'post'>
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button name = "submit">Atualizar</button>
+
+</form>
+
+{% endblock conteudo %}

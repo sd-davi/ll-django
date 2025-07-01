@@ -1,4 +1,12 @@
-<a href = "{% url 'index' %}" style="text-decoration: none">Learning Log</a> - 
-<a href = "{% url 'topics' %}" style="text-decoration: none">Topicos</a> <br>
+<p>
+    <a href = "{% url 'index' %}" style="text-decoration: none">Learning Log</a> - 
+    <a href = "{% url 'topics' %}" style="text-decoration: none">Topicos</a> -
+    {% if user.is_authenticated %}
+        Olá, {{user.username}}
+    {% else %}
+        <a href = "{% url 'login' %}" style="text-decoration: none">Entar</a> 
+    {% endif %}
+</p>
+<br>
 
 {% block conteudo %}{% endblock conteudo %}

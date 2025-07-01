@@ -1,6 +1,7 @@
 {% extends "paginas/base.html" %}
 
 {% block conteudo %}
+   <p>Adicione uma novo Tópico:</p>
    <form action= "{% url 'new_topic' %}" method = 'post'>
         {% csrf_token %}
         {{form.as_p}}

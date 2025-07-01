@@ -1,18 +1,20 @@
 {% extends "paginas/base.html" %}
 
 {% block conteudo %}
-    <h3> Tópico: {{ topic }}</h3>
-    <p>Anotações</p>
+    <p> Tópico: {{ topic }}</p>
+    <p>Anotações: </p>
     <ul>
         {% for entry in entries %}
             <li>
                 <p>{{ entry.date_added}}</p>
                 <p>{{ entry.text}}</p>
+                <p><a href = "{% url 'edit_entry' entry.id %}" style="text-decoration: none">Editar anotação</a></p>
+
             </li>
         {% empty %}
             <li>Não há tópicos</li>
         {% endfor %}
     </ul>
 
-     <a href = "{% url 'new_entry' %}" style="text-decoration: none">Adicionar nova anotação</a>
+     <a href = "{% url 'new_entry' topic.id %}" style="text-decoration: none">Adicionar nova anotação</a>
 {% endblock conteudo %}

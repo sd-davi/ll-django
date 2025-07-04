@@ -1,13 +1,20 @@
 {% extends "paginas/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}
+<h2> <a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{topic}}</a> </h2>
+{% endblock header %} 
+
 
 {% block conteudo %}
+   <h3>Adicione uma nova anotação: </h3>
 
-   <p><a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{topic}}</a></p>
-   <p>Adicione uma nova anotação: </p>
-
-   <form action= "{% url 'new_entry' topic.id %}" method = 'post'>
+   <form action= "{% url 'new_entry' topic.id %}" method = 'post'class = "form">
         {% csrf_token %}
-        {{form.as_p}}
-        <button name = "submit">Adicionar</button>
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+            <button name = "submit" class = "btn btn-primary">Adicionar</button>
+        {% endbuttons %}
    </form>
 {% endblock conteudo %}

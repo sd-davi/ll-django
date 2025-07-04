@@ -1,14 +1,17 @@
 {% extends "paginas/base.html" %}
+{% load bootstrap3 %}
 
+{% block header %}<h2> <a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{topic}}</a> </h2>{% endblock header %} 
 {% block conteudo %}
 
-<p><a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{topic}}</a></p>
 
-<form action= "{% url 'edit_entry' entry.id %}" method = 'post'>
-    {% csrf_token %}
-    {{form.as_p}}
-
-    <button name = "submit">Atualizar</button>
+<form action= "{% url 'edit_entry' entry.id %}" method = 'post'class = "form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+            <button name = "submit" class = "btn btn-primary">Atualizar</button>
+        {% endbuttons %}
 
 </form>
 

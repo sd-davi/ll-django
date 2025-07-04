@@ -1,13 +1,18 @@
 {% extends "paginas/base.html" %}
+{% load bootstrap3 %}
+
+
+{% block header %}<h2>Topicos: </h2>{% endblock header %}
+
 
 {% block conteudo %}
-    Topicos: 
-
     <ul>
         {% for topic in topics %}
             
             <li>
-                <a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{ topic }}</a>
+                <h4>
+                    <a href = "{% url 'topic' topic.id %}" style="text-decoration: none">{{ topic }}</a>
+                </h4>
             </li>
         {% empty %}
             <li>Não há tópicos</li>

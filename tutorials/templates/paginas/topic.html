@@ -1,20 +1,24 @@
 {% extends "paginas/base.html" %}
+{% load bootstrap3 %}
 
+
+{% block header %}<h2>{{ topic }} </h2>{% endblock header %} 
 {% block conteudo %}
-    <p> Tópico: {{ topic }}</p>
-    <p>Anotações: </p>
-    <ul>
+
         {% for entry in entries %}
-            <li>
-                <p>{{ entry.date_added}}</p>
-                <p>{{ entry.text}}</p>
-                <p><a href = "{% url 'edit_entry' entry.id %}" style="text-decoration: none">Editar anotação</a></p>
-
-            </li>
+            <div class = "panel panel-default">
+                <div class = "panel-heading">
+                    <h3>
+                        {{ entry.date_added}}
+                        <small> <a href = "{% url 'edit_entry' entry.id %}" style="text-decoration: none">Editar anotação</a> <small>
+                    </h3>
+                </div>
+                <div class = "panel-body"><h5> {{ entry.text}}</h5></div>
+                <div></div>
+            </div>         
         {% empty %}
-            <li>Não há tópicos</li>
+            Não há tópicos
         {% endfor %}
-    </ul>
 
-     <a href = "{% url 'new_entry' topic.id %}" style="text-decoration: none">Adicionar nova anotação</a>
+    <h3> <a href = "{% url 'new_entry' topic.id %}" style="text-decoration: none">Adicionar nova anotação</a></h3>
 {% endblock conteudo %}

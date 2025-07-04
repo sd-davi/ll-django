@@ -1,17 +1,25 @@
 {% extends "paginas/base.html" %}
+{% load bootstrap3 %}
 
+
+{% block header %}
+<h2>Entre com login e senha</h2>
+{% endblock header %} 
 {% block conteudo %}
         {% if form.errors %}
         <p>Seu login e senha estão incorretos</p>
     {% endif %}
 
-    <form action= "{% url 'login' %}" method = 'post'>
+    <form action= "{% url 'login' %}" method = 'post' class = "form">
         {% csrf_token %}
-        {{form.as_p}}
-
-        <button name = "submit">Entrar</button>
-        <input type =  "hidden" name = "next"  value = "{% url 'index' %}" />
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+            <button name = "submit" class = "btn btn-primary">Entrar</button>
+        {% endbuttons %}
+        <input type =  "hidden" name = "next"  value = "{% url 'topics' %}" />
 
     </form>
+     <p><a href = "{% url 'register' %}" style="text-decoration: none"> Cadastre-se</a></p>
 {% endblock conteudo %}
 

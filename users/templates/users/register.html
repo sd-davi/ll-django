@@ -1,0 +1,23 @@
+{% extends "paginas/base.html" %}
+{% load bootstrap3 %}
+
+{% block header %}<h2>Crie seu usuário e senha: </h2>{% endblock header %}
+{% block conteudo %}
+    {% if form.errors %}
+        <p style = "color: red;">O nome do usuário não deve conter caracteres especiais</p>
+        <p style = "color: red;"> A senha deve ter 8 digitos, com numeros, letras e caracters especiais</p>
+        <p style = "color: red;">As senhas devem ser iguais</p>
+    {% endif %}
+
+    <form action= "{% url 'register' %}" method = 'post' class = "none form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        
+        {% buttons %}
+            <button name = "submit" class = "btn btn-primary">Cadastrar</button>
+        {% endbuttons %}
+        <input type =  "hidden" name = "next"  value = "{% url 'index' %}" />
+
+    </form>
+{% endblock conteudo %}
+

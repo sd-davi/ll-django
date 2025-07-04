@@ -1,12 +1,63 @@
-<p>
-    <a href = "{% url 'index' %}" style="text-decoration: none">Learning Log</a> - 
-    <a href = "{% url 'topics' %}" style="text-decoration: none">Topicos</a> -
-    {% if user.is_authenticated %}
-        Olá, {{user.username}}
-    {% else %}
-        <a href = "{% url 'login' %}" style="text-decoration: none">Entar</a> 
-    {% endif %}
-</p>
-<br>
+{% load bootstrap3 %}
 
-{% block conteudo %}{% endblock conteudo %}
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="site Learning logs">
+    <meta name="keywords" content="Learning logs">
+    <meta name="author" content="Davi">
+    <title>Learning Logs</title>
+
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <style>
+        .none ul{
+            display : none;
+        }
+
+        .help-block{
+            display : none;
+        }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button 
+                type="button" 
+                class="navbar-toggle collapsed" 
+                data-toggle="collapse" 
+                data-target="#navbar" 
+                aria-expanded="false">
+            </button>
+                <a class="navbar-brand" href = "{% url 'index' %}" style="text-decoration: none">Learning Log</a>
+            </div>
+            <div class="collapse navbar-collapse" id = "navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href = "{% url 'topics' %}" style="text-decoration: none">Topicos</a> </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li><a>Olá, {{user.username}}</a></li>
+                        <li><a href = "{% url 'logout' %}" style="text-decoration: none">Sair</a> </li>
+                    {% else %}
+                        <li><a href = "{% url 'register' %}" style="text-decoration: none">Cadastre-se</a></li>
+                        <li><a href = "{% url 'login' %}" style="text-decoration: none">Entar</a></li>
+                    {% endif %}  
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class = "page-header">{% block header %}{% endblock header %} </div>
+        <div>{% block conteudo %}{% endblock conteudo %}</div>
+    </div>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,15 @@
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - sqlite_data:/app/db_volume # Monta um volume nomeado para o diretório do banco de dados
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+
+volumes:
+  sqlite_data:
